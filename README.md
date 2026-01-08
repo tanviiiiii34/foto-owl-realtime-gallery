@@ -1,16 +1,84 @@
-# React + Vite
+Foto Owl – Real-Time Image Gallery
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. What This Project Is About
+The main goal of the application is to allow multiple users to view a shared image gallery and interact with images using emoji reactions and comments. All interactions are synchronized in real time, meaning actions performed by one user are instantly visible to others without refreshing the page.
 
-Currently, two official plugins are available:
+Images are fetched dynamically from the Unsplash API and displayed in a clean, scrollable gallery layout.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ 2. Tech Stack Used
 
-## React Compiler
+- React (Functional Components)
+- Vite
+- Tailwind CSS
+- InstantDB (Real-time data synchronization)
+- Unsplash API
+- Local Storage (basic user identity)
+- Vercel (deployment)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+ 3. Key Features
 
-## Expanding the ESLint configuration
+Image Gallery
+The homepage displays a grid of high-quality images fetched from the Unsplash API.  
+Images load smoothly and are arranged in a responsive, scrollable layout.
+Clicking on any image opens a focused modal view where users can interact with that specific image.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Real-Time Emoji Reactions
+Each image supports emoji reactions.
+- Users can react using emojis such as heart, laugh, and surprise
+- Reaction counts update in real time across all open tabs and users
+- No authentication is required
+- Every reaction is stored and synced using InstantDB
+This ensures that if multiple users are viewing the same image, everyone sees the same reaction count instantly.
+
+
+Real-Time Comments
+Users can add comments to any image from the modal view.
+- Comments appear instantly for all connected users
+- The comment input is controlled and updates smoothly
+- Each comment is tied to a specific image
+- Real-time synchronization is handled entirely by InstantDB
+This makes the interaction feel collaborative, similar to modern social platforms.
+
+
+Live Feed (Global Activity)
+The application includes a real-time feed section that shows activity happening across all images.
+Examples of feed updates include:
+- A user reacting to an image
+- A new comment being added
+The feed updates immediately when any interaction occurs, allowing users to see activity even when they are not viewing the same image.
+
+
+Basic User Identity
+To avoid complex authentication, the app generates a simple user identity using local storage.
+This identity is used to:
+- Distinguish user actions
+- Keep interaction behavior consistent across sessions
+
+
+4. Why This Project Matters
+This project demonstrates:
+- Real-time data synchronization across multiple users
+- Practical use of a real-time database (InstantDB)
+- Clean separation of React components (Gallery, Modal, Feed)
+- Handling async data from third-party APIs
+- Managing shared state without traditional authentication
+Rather than focusing only on visuals, the project emphasizes correctness, real-time behavior, and clarity.
+
+
+ 5. User Flow Summary
+
+1. User opens the application
+2. Images load automatically from Unsplash
+3. User clicks an image to open it in a modal
+4. User reacts with emojis or adds comments
+5. Reactions and comments update instantly for all users
+6. Feed section reflects all interactions in real time
+
+
+
+6. Setup Instructions
+
+### Clone the repository
+```bash
+git clone https://github.com/<your-username>/foto-owl-realtime-gallery.git
+cd foto-owl-realtime-gallery
