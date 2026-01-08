@@ -38,13 +38,20 @@ export default function ImageModal({ image, onClose }) {
   }, [imageId]);
 
   return (
-    <div
-      className="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
-      onClick={() => onClose && onClose()}
-    >
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Backdrop */}
       <div
-        className="relative bg-white p-4 rounded w-[600px] max-h-[90vh] overflow-auto"
+        onClick={() => onClose && onClose()}
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm
+                   animate-fadeIn"
+      />
+
+      {/* Modal */}
+      <div
         onClick={(e) => e.stopPropagation()}
+        className="relative bg-white p-4 rounded w-[600px]
+                   max-h-[90vh] overflow-auto
+                   animate-scaleIn"
       >
         {/* Close button */}
         <button
@@ -54,7 +61,7 @@ export default function ImageModal({ image, onClose }) {
           ✖
         </button>
 
-        {/* Image (CRASH SAFE) */}
+        {/* Image */}
         <img
           src={image.urls?.regular || image.urls?.small}
           alt={image.alt_description || "image"}
@@ -101,6 +108,12 @@ export default function ImageModal({ image, onClose }) {
 
         {/* Comments */}
         <div className="space-y-2 mb-3">
+          {comments.length === 0 && (
+            <p className="text-sm text-gray-500">
+              No comments yet. Be the first.
+            </p>
+          )}
+
           {comments.map((c, i) => (
             <div key={i} className="text-sm border-b pb-1">
               <span
@@ -119,7 +132,7 @@ export default function ImageModal({ image, onClose }) {
           <input
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            className="border flex-1 px-2"
+            className="border flex-1 px-2 py-1 rounded"
             placeholder="Add comment..."
           />
           <button
@@ -129,6 +142,7 @@ export default function ImageModal({ image, onClose }) {
               setComment("");
               load();
             }}
+            className="px-3 py-1 border rounded"
           >
             Post
           </button>
